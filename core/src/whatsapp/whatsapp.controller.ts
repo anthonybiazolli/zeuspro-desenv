@@ -30,7 +30,12 @@ export class WhatsappController {
     return await this.whatsappService.getInstanceStatus(instanceName);
   }
 
-  // --- NOVA ROTA: Adicionar contato manualmente ---
+  // --- ROTA CORRIGIDA (Resolve o erro 404 do console) ---
+  @Get('device-contacts/:instanceName')
+  async getDeviceContacts(@Param('instanceName') instanceName: string) {
+    return await this.whatsappService.getDeviceContacts(instanceName);
+  }
+
   @Post('contact')
   async createContact(@Body() body: { name: string; phoneNumber: string }) {
     return await this.whatsappService.createContact(body.name, body.phoneNumber);
